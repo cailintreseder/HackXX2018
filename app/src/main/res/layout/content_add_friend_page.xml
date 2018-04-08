@@ -12,6 +12,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/phonenumber"
         android:background="#f9f"
         android:hint="Input phone number of friend:"
         android:textAlignment="center"
@@ -29,6 +30,7 @@
         android:layout_height="50dp"
         android:background="#f9f"
         android:text="Enter"
+        android:id="@+id/submit"
         android:textAlignment="center"
         android:textColor="#111"
         android:textSize="40px"
