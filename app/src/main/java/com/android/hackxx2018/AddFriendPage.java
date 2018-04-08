@@ -4,6 +4,7 @@ package com.android.hackxx2018;
  * Created by Sun on 4/7/2018.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -43,11 +44,17 @@ public class AddFriendPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String phoneNumber = inputText.getText().toString();
-                String userName =
-
+                //String userName =
+                backToList();
             }
         });
 
+    }
+
+    public void backToList() {
+        Intent toFriendsListIntent = new Intent(this, FriendsList.class);
+
+        startActivity(toFriendsListIntent);
     }
 
     @Override

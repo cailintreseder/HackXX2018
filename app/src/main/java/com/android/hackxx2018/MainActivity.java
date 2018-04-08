@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Intent toFriendsListIntent = new Intent(this, FriendsList.class);
 
         startActivity(toFriendsListIntent);
+
     }
 
     @Override
