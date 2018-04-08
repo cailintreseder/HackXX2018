@@ -4,6 +4,7 @@ package com.android.hackxx2018;
  * Created by Sun on 4/7/2018.
  */
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -55,7 +56,19 @@ public class FriendsList extends AppCompatActivity {
         button.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         button.setMarqueeRepeatLimit(1000);
         //ChatActivity.displayChatMessages();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    startChatIntent();
+            }
+        });
 
+    }
+
+    public void startChatIntent() {
+        Intent toChat = new Intent(this, ChatActivity.class);
+
+        startActivity(toChat);
     }
 
     @Override
