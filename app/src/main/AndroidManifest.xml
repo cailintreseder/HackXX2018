@@ -30,13 +30,13 @@
         <activity
             android:name=".FriendsList"
             android:label="Friends"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label="HackXX2018"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 
