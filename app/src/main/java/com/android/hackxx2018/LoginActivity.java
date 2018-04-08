@@ -3,6 +3,7 @@ package com.android.hackxx2018;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -106,27 +107,13 @@ public class LoginActivity extends AppCompatActivity {
                     "Please enter the code below into the verification box in the app." +
                     "\n\n" + sentCode;
 
-            /*
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setData(Uri.parse("mailto:"));
-            emailIntent.setType("text/plain");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Verification Code for HackXX2018");
-            emailIntent.putExtra(Intent.EXTRA_TEXT, text);
-
-            try {
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                finish();
-                Log.i("Finished sending email...", "");
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(LoginActivity.this,
-                        "There is no email client installed.", Toast.LENGTH_SHORT).show();
-            }*/
             String fromEmail = "cse110team35@gmail.com";
-            String fromPassword = "softwareengineering";
+            String fromPassword = "softwareengingeering";
             String emailSubject = "Verification Code for HackXX2018";
 
             try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
                 SendMailTask sender = new SendMailTask(fromEmail, fromPassword);
                 sender.sendMail(emailSubject, text, fromEmail, em);
             } catch (Exception e) {
@@ -147,7 +134,18 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences.Editor edit = prefs.edit();
             edit.putString("Code", sentCode);
             edit.apply();
-            launchActivity();
+
+
+            EditText lang = findViewById(R.id.language);
+            String language = lang.getText().toString();
+            if (TextUtils.isEmpty(language)) {
+                Toast.makeText(LoginActivity.this,
+                        "Please enter the language you wish to communicate from",
+                        Toast.LENGTH_LONG).show();
+            }
+            else {
+                launchActivity();
+            }
         }
         else {
             Toast.makeText(LoginActivity.this, "Error: Wrong verification code",

@@ -1,5 +1,7 @@
 package com.android.hackxx2018;
 
+import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,6 +64,7 @@ public class SendMailTask extends javax.mail.Authenticator {
             Transport.send(message);
         }catch(Exception e){
 
+            Log.e("ERROR", "Could not send message", e);
         }
     }
 

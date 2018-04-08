@@ -12,12 +12,11 @@
         android:id="@+id/welcome_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please sign in with a valid email address and phone number.
-A verification message will be sent to your email."
+        android:text="Please sign in with a valid email address and phone number. A verification code will be sent to your email."
         android:textSize="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +27,7 @@ A verification message will be sent to your email."
         android:layout_height="wrap_content"
         android:text="Email:"
         android:textSize="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="@id/email"
         app:layout_constraintTop_toBottomOf="@id/welcome_message" />
 
@@ -49,7 +48,7 @@ A verification message will be sent to your email."
         android:layout_height="wrap_content"
         android:text="Phone Number:"
         android:textSize="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="@id/phone"
         app:layout_constraintTop_toBottomOf="@id/email" />
 
@@ -82,7 +81,7 @@ A verification message will be sent to your email."
         android:layout_height="wrap_content"
         android:text="Verify Code:"
         android:textSize="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="@id/verify_edit"
         app:layout_constraintTop_toBottomOf="@id/phone" />
 
@@ -107,5 +106,28 @@ A verification message will be sent to your email."
         app:layout_constraintLeft_toRightOf="@id/verify_edit"
         app:layout_constraintBottom_toBottomOf="@id/verify_edit"
         app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/language_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Language:"
+        android:textSize="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verify_edit" />
+
+    <EditText
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:width="200dp"
+        app:layout_constraintLeft_toRightOf="@id/language_label"
+        app:layout_constraintTop_toBottomOf="@id/verify_edit"
+        />
 
 </android.support.constraint.ConstraintLayout>
