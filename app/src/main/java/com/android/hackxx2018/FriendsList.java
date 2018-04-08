@@ -36,6 +36,13 @@ public class FriendsList extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Button addFriend = (Button) findViewById(R.id.addFriend);
+        addFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startAddFriends();
+            }
+        });
     }
 
     public void addFriend(String friendName) {
@@ -69,6 +76,12 @@ public class FriendsList extends AppCompatActivity {
         Intent toChat = new Intent(this, ChatActivity.class);
 
         startActivity(toChat);
+    }
+
+    public void startAddFriends() {
+        Intent toAddFriends = new Intent(this, AddFriendPage.class);
+
+        startActivity(toAddFriends);
     }
 
     @Override

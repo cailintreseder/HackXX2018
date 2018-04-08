@@ -14,6 +14,7 @@ import com.android.hackxx2018.TranslatorBackgroundTask;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
@@ -110,7 +111,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        listOfMessages.setAdapter(adapter);*/
+        listOfMessages.setAdapter(adapter);
     }
 
 }

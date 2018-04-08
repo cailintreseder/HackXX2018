@@ -43,7 +43,7 @@ public class AddFriendPage extends AppCompatActivity {
         submitFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = inputText.getText().toString();
+                String phoneNumber = "+1" + inputText.getText().toString();
                 //String userName =
                 backToList();
             }
