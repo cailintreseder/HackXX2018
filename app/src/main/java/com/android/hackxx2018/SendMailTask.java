@@ -41,9 +41,11 @@ public class SendMailTask extends javax.mail.Authenticator {
         props.put("mail.smtp.socketFactory.class",
                 "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.debug", "true");
         props.setProperty("mail.smtp.quitwait", "false");
 
-        session = Session.getDefaultInstance(props, this);
+        session = Session.getDefaultInstance(props, new MailAuthenticator("cse110team35@gmail.com", "softwareengineering"));
+        session.setDebug(true);
     }
 
     protected PasswordAuthentication getPasswordAuthentication() {

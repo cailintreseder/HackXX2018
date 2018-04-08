@@ -1,19 +1,13 @@
 package com.android.hackxx2018;
 
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
-import android.util.Log;
-
-import com.android.hackxx2018.ChatMessage;
-import com.android.hackxx2018.R;
-import com.android.hackxx2018.TranslatorBackgroundTask;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
@@ -109,7 +103,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        listOfMessages.setAdapter(adapter);*/
+        listOfMessages.setAdapter(adapter);
     }
 
 }
