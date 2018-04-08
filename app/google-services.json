@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "728236887284-obju9g4parnourpgl9giutdj9uj2tfkq.apps.googleusercontent.com",
+          "client_id": "728236887284-bb15qhjpghi3dhfv3si67ipronhbr79n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.android.hackxx2018",
-            "certificate_hash": "18ef7c73364001ec9e4340a22576b45633746263"
+            "certificate_hash": "9956f8e8bb42e87a47eacfbe2095def544f8e738"
           }
         },
         {
