@@ -54,6 +54,8 @@ public class FriendsList extends AppCompatActivity {
         button.setSingleLine(true);
         button.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         button.setMarqueeRepeatLimit(1000);
+        //ChatActivity.displayChatMessages();
+
     }
 
     @Override
