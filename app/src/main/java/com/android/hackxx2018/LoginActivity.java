@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             edit.putString("Code", sentCode);
             edit.apply();
 
+
             EditText lang = findViewById(R.id.language);
             String language = lang.getText().toString();
             if (TextUtils.isEmpty(language)) {

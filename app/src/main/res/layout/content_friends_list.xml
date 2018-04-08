@@ -17,6 +17,7 @@
         android:textAlignment="center"
         android:textColor="#111"
         android:textSize="60px"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

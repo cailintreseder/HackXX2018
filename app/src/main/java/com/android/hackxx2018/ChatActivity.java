@@ -25,8 +25,8 @@ import java.util.concurrent.ExecutionException;
 
 public class ChatActivity extends AppCompatActivity {
     private FirebaseListAdapter<ChatMessage> adapter;
-    String firstLang = "";
-    String secondLang = "";
+    String firstLang = "en";
+    String secondLang = "zh";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         //String translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair); // Returns the translated text as a String
         //String translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair).get(); // Returns the translated text as a String
         String translationResult = null; // Returns the translated text as a String
+        //to do: get the language symbols
         try {
             translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair).get();
         } catch (InterruptedException e) {

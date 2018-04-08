@@ -12,8 +12,7 @@
         android:id="@+id/welcome_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please sign in with a valid email address and phone number.
-A verification code will be sent to your email."
+        android:text="Please sign in with a valid email address and phone number. A verification code will be sent to your email."
         android:textSize="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -107,6 +106,7 @@ A verification code will be sent to your email."
         app:layout_constraintLeft_toRightOf="@id/verify_edit"
         app:layout_constraintBottom_toBottomOf="@id/verify_edit"
         app:layout_constraintRight_toRightOf="parent"/>
+
 
     <TextView
         android:id="@+id/language_label"
