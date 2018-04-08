@@ -19,7 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".ChatActivity"></activity>
+=======
+        <activity
+            android:name=".FriendsList"
+            android:label="Friends"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+>>>>>>> 7cf5d99a72900096bc70f2545ad66f6f5d1ed5f3
     </application>
 
 </manifest>
