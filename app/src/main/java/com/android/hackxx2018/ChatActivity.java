@@ -3,11 +3,9 @@ package com.android.hackxx2018;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +47,7 @@ public class ChatActivity extends AppCompatActivity{
     private void displayChatMessages() {
         ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
 
+        /*
         adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class,
                 R.layout.message, FirebaseDatabase.getInstance().getReference()) {
             @Override
@@ -68,7 +67,7 @@ public class ChatActivity extends AppCompatActivity{
             }
         };
 
-        listOfMessages.setAdapter(adapter);
+        listOfMessages.setAdapter(adapter);*/
     }
 
 }
