@@ -22,8 +22,13 @@
         <activity
             android:name=".FriendsList"
             android:label="Friends"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
     </application>
 
 </manifest>
