@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                     "\n\n" + sentCode;
 
             String fromEmail = "cse110team35@gmail.com";
-            String fromPassword = "softwareengingeering";
+            String fromPassword = "softwareengineering";
             String emailSubject = "Verification Code for HackXX2018";
 
             try {
@@ -144,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
             else {
+                //add the phone number, username, and language to firebase
+
                 launchActivity();
             }
         }
@@ -152,5 +154,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
     }
+
 
 }
