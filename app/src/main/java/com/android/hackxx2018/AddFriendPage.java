@@ -14,12 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class AddFriendPage extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -61,7 +64,7 @@ public class AddFriendPage extends AppCompatActivity {
                             }
                         }
                         else {
-                            Log.e("ERROR", "No children");
+                            Toast.makeText(AddFriendPage.this, "There were no users with this phone number available", LENGTH_LONG).show();
                             //list will still be null
                         }
                     }

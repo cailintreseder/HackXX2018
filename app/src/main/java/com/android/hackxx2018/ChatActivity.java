@@ -1,5 +1,6 @@
 package com.android.hackxx2018;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
@@ -21,6 +21,7 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseListAdapter<ChatMessage> adapter;
     String firstLang = "en";
     String secondLang = "zh";
+    String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,8 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         FloatingActionButton fab =
                 (FloatingActionButton) findViewById(R.id.fab);
+        Intent in = getIntent();
+        username = in.getStringExtra("User");
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,14 +47,11 @@ public class ChatActivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance()
                         .getReference()
                         .push()
-                        .setValue(new ChatMessage(translatedMessage,
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName())
-                        );
+                        .setValue(new ChatMessage(translatedMessage, username));
 
                 // Clear the input
                 input.setText("");
+                displayChatMessages();
             }
         });
     }

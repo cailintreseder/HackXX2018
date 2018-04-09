@@ -25,6 +25,7 @@ import android.widget.Button;
 public class FriendsList extends AppCompatActivity {
     Context context;
     Button button;
+    String user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -54,10 +55,11 @@ public class FriendsList extends AppCompatActivity {
     }
 
     public void addFriend(String friendName) {
+        final String friend = friendName;
         ConstraintLayout constraintLayout = findViewById(R.id.layout);
         final float scale = this.getResources().getDisplayMetrics().density;
         int pixels = (int) (50 * scale + 0.5f);
-        int textSize = (int) (10 * scale + 0.5f);
+        int textSize = (int) (10 * scale + 0.3f);
         if (context != null) {
             Log.d("NOTNULL", "Not null");
         }
@@ -81,7 +83,8 @@ public class FriendsList extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    startChatIntent();
+                user = friend;
+                startChatIntent();
             }
         });
 
@@ -105,16 +108,16 @@ public class FriendsList extends AppCompatActivity {
                     button.getId(), ConstraintSet.TOP,
                     this.button.getId(), ConstraintSet.BOTTOM, 0);
         }
-        this.button = button;
 
         constraintSet.constrainDefaultHeight(button.getId(), pixels);
         constraintSet.applyTo(constraintLayout);
+        this.button = button;
 
     }
 
     public void startChatIntent() {
         Intent toChat = new Intent(this, ChatActivity.class);
-
+        toChat.putExtra("User", user);
         startActivity(toChat);
 
     }
