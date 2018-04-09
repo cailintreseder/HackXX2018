@@ -103,7 +103,7 @@ public class AddFriendPage extends AppCompatActivity {
         Intent toFriendsListIntent = new Intent(this, FriendsList.class);
         toFriendsListIntent.putExtra("Username", username);
         toFriendsListIntent.putExtra("Language", language);
-        startService(toFriendsListIntent);
+        startActivity(toFriendsListIntent);
     }
 
     @Override
