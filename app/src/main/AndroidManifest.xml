@@ -37,6 +37,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".ChatActivity"></activity>
+        <activity
+            android:name=".AddFriendPage"
+            android:label="Add Friends"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 

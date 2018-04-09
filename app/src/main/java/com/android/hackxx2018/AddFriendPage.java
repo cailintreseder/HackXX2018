@@ -6,8 +6,6 @@ package com.android.hackxx2018;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,77 +26,15 @@ public class AddFriendPage extends AppCompatActivity {
     DatabaseReference ref = database.getReference("Users");
     String username;
     String language;
+    boolean updated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
+        setContentView(R.layout.activity_add_friend_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final FirebaseCallback callback = new FirebaseCallback() {
-            @Override
-            public void onCallback(String phone, String username, String value) {
 
-            }
-        };
-        ref.addChildEventListener(new ChildEventListener() {
-            //queryRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
-                    if (dataSnapshot.getKey().equals("num")) {}
-                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                        snapshot.getKey();
-                        snapshot.getValue();
-                    }
-
-                    /*
-                    String username = (String)dataSnapshot.getKey();
-
-                    String val = (String)dataSnapshot.getValue();
-                    ArrayList<String> pair = new ArrayList<>(2);
-                    pair.add(0, username);
-                    pair.add(1, val);
-                    //callback.onCallback(username, val);
-                    dataList.add(pair);*/
-                }
-                else {
-                    Log.e("ERROR", "No children");
-                    //list will still be null
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("ERROR", "Cancelled");
-            }
-        });
-
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         Button submitFriend = (Button) findViewById(R.id.submit);
         final EditText inputText = (EditText) findViewById(R.id.phonenumber);
 
@@ -111,7 +47,7 @@ public class AddFriendPage extends AppCompatActivity {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         if (dataSnapshot != null && dataSnapshot.getValue() != null) {
-                            if (dataSnapshot.getKey().equals(phoneNumber)) {
+                            if (dataSnapshot.getKey().equals("+1" + phoneNumber)) {
                                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                                     String key = snapshot.getKey();
                                     if (key.equals("Email")) {
@@ -121,6 +57,7 @@ public class AddFriendPage extends AppCompatActivity {
                                         language = snapshot.getValue().toString();
                                     }
                                 }
+                                backToList(username, language);
                             }
                         }
                         else {
@@ -150,17 +87,23 @@ public class AddFriendPage extends AppCompatActivity {
                     }
                 });
                 //TODO: add username based off of phone number given
+                /*
                 String userName = username;
-                backToList();
+                String phoneNum = "+1" + inputText.getText().toString();
+                String lang = language;
+
+                FriendsList fl = new FriendsList();
+                backToList();*/
             }
         });
 
     }
 
-    public void backToList() {
+    public void backToList(String username, String language) {
         Intent toFriendsListIntent = new Intent(this, FriendsList.class);
-
-        startActivity(toFriendsListIntent);
+        toFriendsListIntent.putExtra("Username", username);
+        toFriendsListIntent.putExtra("Language", language);
+        startService(toFriendsListIntent);
     }
 
     @Override
