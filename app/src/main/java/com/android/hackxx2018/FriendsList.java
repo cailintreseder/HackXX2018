@@ -4,6 +4,7 @@ package com.android.hackxx2018;
  * Created by Sun on 4/7/2018.
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,11 +19,41 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.ArraySet;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
+
 
 public class FriendsList extends AppCompatActivity {
-
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -49,7 +80,11 @@ public class FriendsList extends AppCompatActivity {
         final float scale = this.getResources().getDisplayMetrics().density;
         int pixels = (int) (50 * scale + 0.5f);
         int textSize = (int) (10 * scale + 0.5f);
-        Button button = new Button(this);
+        if (context != null) {
+            Log.d("NOTNULL", "Not null");
+        }
+        else { Log.e("NULL", "Is null"); }
+        Button button = new Button(context);
         android.support.constraint.ConstraintLayout.LayoutParams params = new
                 android.support.constraint.ConstraintLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, pixels);
@@ -76,6 +111,7 @@ public class FriendsList extends AppCompatActivity {
         Intent toChat = new Intent(this, ChatActivity.class);
 
         startActivity(toChat);
+        addFriend("Catherine");
     }
 
     public void startAddFriends() {

@@ -26,7 +26,7 @@ public class AddFriendPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
+        setContentView(R.layout.activity_add_friend_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,6 +47,7 @@ public class AddFriendPage extends AppCompatActivity {
 
                 //TODO: add username based off of phone number given
                 // String userName =
+                FriendsList fl = new FriendsList();
                 backToList();
             }
         });
@@ -55,7 +56,6 @@ public class AddFriendPage extends AppCompatActivity {
 
     public void backToList() {
         Intent toFriendsListIntent = new Intent(this, FriendsList.class);
-
         startActivity(toFriendsListIntent);
     }
 
