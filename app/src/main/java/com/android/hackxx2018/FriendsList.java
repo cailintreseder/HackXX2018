@@ -8,30 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Environment;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.ArraySet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -39,18 +20,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.Toast;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
 
 
 public class FriendsList extends AppCompatActivity {
     Context context;
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -58,25 +32,29 @@ public class FriendsList extends AppCompatActivity {
         setContentView(R.layout.activity_friends_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        button = null;
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        Intent in = getIntent();
+        if (in != null) {
+            String username = in.getStringExtra("Username");
+            String language = in.getStringExtra("Language");
+            if (username != null) {
+                addFriend(username);
             }
-        });
-        Button addFriend = (Button) findViewById(R.id.addFriend);
+        }
+
+        Button addFriend = findViewById(R.id.addFriend);
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startAddFriends();
             }
         });
+
     }
 
     public void addFriend(String friendName) {
+        ConstraintLayout constraintLayout = findViewById(R.id.layout);
         final float scale = this.getResources().getDisplayMetrics().density;
         int pixels = (int) (50 * scale + 0.5f);
         int textSize = (int) (10 * scale + 0.5f);
@@ -84,7 +62,7 @@ public class FriendsList extends AppCompatActivity {
             Log.d("NOTNULL", "Not null");
         }
         else { Log.e("NULL", "Is null"); }
-        Button button = new Button(context);
+        Button button = new Button(this);
         android.support.constraint.ConstraintLayout.LayoutParams params = new
                 android.support.constraint.ConstraintLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, pixels);
@@ -98,6 +76,8 @@ public class FriendsList extends AppCompatActivity {
         button.setEllipsize(TextUtils.TruncateAt.MARQUEE);
         button.setMarqueeRepeatLimit(1000);
         //ChatActivity.displayChatMessages();
+        constraintLayout.addView(button, params);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,19 +85,45 @@ public class FriendsList extends AppCompatActivity {
             }
         });
 
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+
+        constraintSet.connect(
+                button.getId(), ConstraintSet.LEFT,
+                ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
+        constraintSet.connect(
+                button.getId(), ConstraintSet.RIGHT,
+                ConstraintSet.PARENT_ID, ConstraintSet.RIGHT,0
+        );
+        if (this.button == null) {
+            constraintSet.connect(
+                    button.getId(), ConstraintSet.TOP,
+                    ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
+        }
+        else {
+            constraintSet.connect(
+                    button.getId(), ConstraintSet.TOP,
+                    this.button.getId(), ConstraintSet.BOTTOM, 0);
+        }
+        this.button = button;
+
+        constraintSet.constrainDefaultHeight(button.getId(), pixels);
+        constraintSet.applyTo(constraintLayout);
+
     }
 
     public void startChatIntent() {
         Intent toChat = new Intent(this, ChatActivity.class);
 
         startActivity(toChat);
-        addFriend("Catherine");
+
     }
 
     public void startAddFriends() {
         Intent toAddFriends = new Intent(this, AddFriendPage.class);
 
         startActivity(toAddFriends);
+
     }
 
     @Override

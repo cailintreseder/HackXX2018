@@ -6,22 +6,27 @@ package com.android.hackxx2018;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AddFriendPage extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myFirebaseRef = database.getReference();
+    DatabaseReference ref = database.getReference("Users");
+    String username;
+    String language;
+    boolean updated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,32 +35,74 @@ public class AddFriendPage extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         Button submitFriend = (Button) findViewById(R.id.submit);
         final EditText inputText = (EditText) findViewById(R.id.phonenumber);
+
         submitFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "+1" + inputText.getText().toString();
+                final String phoneNumber = inputText.getText().toString();
+                ref.addChildEventListener(new ChildEventListener() {
+                    //queryRef.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        if (dataSnapshot != null && dataSnapshot.getValue() != null) {
+                            if (dataSnapshot.getKey().equals("+1" + phoneNumber)) {
+                                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                    String key = snapshot.getKey();
+                                    if (key.equals("Email")) {
+                                        username = snapshot.getValue().toString();
+                                    }
+                                    else if (key.equals("Language")) {
+                                        language = snapshot.getValue().toString();
+                                    }
+                                }
+                                backToList(username, language);
+                            }
+                        }
+                        else {
+                            Log.e("ERROR", "No children");
+                            //list will still be null
+                        }
+                    }
 
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e("ERROR", "Cancelled");
+                    }
+                });
                 //TODO: add username based off of phone number given
-                // String userName =
+                /*
+                String userName = username;
+                String phoneNum = "+1" + inputText.getText().toString();
+                String lang = language;
+
                 FriendsList fl = new FriendsList();
-                backToList();
+                backToList();*/
             }
         });
 
     }
 
-    public void backToList() {
+    public void backToList(String username, String language) {
         Intent toFriendsListIntent = new Intent(this, FriendsList.class);
+        toFriendsListIntent.putExtra("Username", username);
+        toFriendsListIntent.putExtra("Language", language);
         startActivity(toFriendsListIntent);
     }
 
