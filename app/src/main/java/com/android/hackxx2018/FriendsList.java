@@ -36,6 +36,7 @@ public class FriendsList extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
     }
 
     public void addFriend(String friendName) {

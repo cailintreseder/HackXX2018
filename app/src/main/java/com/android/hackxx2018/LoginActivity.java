@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
@@ -20,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LOGIN";
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase db;
+    private DatabaseReference ref;
 
     private EditText phoneNumber;
     private EditText email;
@@ -29,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button verifyCode;
 
     private String sentCode;
+    private String verifiedPhone;
+    private String verifiedEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,9 @@ public class LoginActivity extends AppCompatActivity {
         code.setEnabled(false);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference("Users");
+
 
         // Assign click listeners
         sendCode.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +103,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter a phone number", Toast.LENGTH_SHORT).show();
         }
         else {
-
+            verifiedEmail = em;
+            verifiedPhone = phone;
             String[] TO = {em};
             Random r = new Random();
             int c1 = r.nextInt(10);
@@ -145,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             else {
                 //add the phone number, username, and language to firebase
-
+                updateFirebase(language);
                 launchActivity();
             }
         }
@@ -155,5 +166,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
+    private void updateFirebase(String language) {
+        ref.child(verifiedPhone).child("Email").setValue(verifiedEmail);
+        ref.child(verifiedPhone).child("Language").setValue(language);
+    }
 }
